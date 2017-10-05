@@ -1,0 +1,311 @@
+EMPTY
+# Go to top left and then loop up and down moving right each time
+# Go to top left corner then switch to state 1
+0 x*** -> N 0
+0 N*x* -> W 0
+0 N*W* -> X 1
+
+# Go to bottom then turn right and switch to state 2
+1 ***x -> S 1
+1 ***S -> E 2
+
+# Go to top then turn right and switch back to state 1
+2 x*** -> N 2
+2 N*** -> E 1
+
+
+MAZE
+# Hug left wall by always trying to go left based on direction bot is facing
+# 0 - bot is facing north
+# 1 - bot is facing east
+# 2 - bot us facing south
+# 3 - bot is facing west
+
+# If we're travelling north try west, north, east, south
+0 **x* -> W 3
+0 x*W* -> N 0
+0 NxW* -> E 1
+0 NEWx -> S 2
+
+# If we're travelling west try south, west, north, east
+3 ***x -> S 2
+3 **xS -> W 3
+3 x*WS -> N 0
+3 NxWS -> E 1
+
+# If we're travelling south try east, south, west, north
+2 *x** -> E 1
+2 *E*x -> S 2
+2 *ExS -> W 3
+2 xEWS -> N 0
+
+# If we're travelling east try north, east, south, west
+1 x*** -> N 0
+1 Nx** -> E 1
+1 NE*x -> S 2
+1 NExS -> W 3
+
+DIAGONAL
+# Go to the top then loop left and right stepping down each time
+# When diamond starts to shrink temporary third state is used
+# to execute a left then a down then a state switch
+# Go to top slot then switch to state 1
+0 x*** -> N 0
+0 Nx** -> E 0
+0 NEx* -> W 0
+0 NEWx -> S 1
+
+# Go left then switch to state 2
+1 **x* -> W 1
+1 **W* -> X 2
+
+# Go right and switch back to 2, if south is blocked switch to 3
+2 *x** -> E 2
+2 *E*x -> S 1
+2 *ExS -> W 3
+
+# Go south then back to 1
+3 **** -> S 1
+
+
+
+STALACTITE
+# Find a wall
+0 x*** -> N 0
+0 N*** -> X 1
+
+# North Wall
+1 x*** -> N 2
+1 N*x* -> X 11
+1 N*Wx -> S 4
+
+# East Wall
+2 *x** -> E 3
+2 xE** -> X 12
+2 NEx* -> W 1
+
+# South Wall
+3 ***x -> S 4
+3 *x*S -> X 13
+3 xE*S -> N 1
+
+# West Wall
+4 **x* -> W 1
+4 **Wx -> X 14
+4 *xWS -> E 2
+
+# North South-North then WEST
+11 ***x -> S 11
+11 ***S -> X 21
+21 x*** -> N 21
+21 N*** -> W 1
+
+# East West-East then NORTH
+12 **x* -> W 12
+12 **W* -> X 22
+22 *x** -> E 22
+22 *E** -> N 2
+
+# South North-South then EAST
+13 x*** -> N 13
+13 N*** -> X 23
+23 ***x -> S 23
+23 ***S -> E 3
+
+# West East-West then SOUTH
+14 *x** -> E 14
+14 *E** -> X 24
+24 **x* -> W 24
+24 **W* -> S 4
+
+
+Stalactite 2
+0 x*** -> N 0
+0 N*** -> X 1
+
+# Hug North Wall
+1 x*** -> N 2
+1 N*x* -> X 10
+1 N*Wx -> X 40
+1 NxWS -> E 3
+
+# Hug East Wall
+2 *x** -> E 3 
+2 xE** -> X 20
+2 NEx* -> X 10
+2 NEWx -> S 4
+
+# Hug South Wall
+3 ***x -> S 4
+3 *x*S -> X 30
+3 xE*S -> X 20
+3 NExS -> W 1
+
+# Hug West Wall
+4 **x* -> W 1
+4 **Wx -> X 40
+4 *xWS -> X 30
+4 xEWS -> N 2
+
+# North South-North then WEST
+10 ***x -> S 10
+10 ***S -> X 11
+11 x*** -> N 11
+11 N*** -> W 1
+
+# East West-East then NORTH
+20 **x* -> W 20
+20 **W* -> X 21
+21 *x** -> E 21
+21 *E** -> N 2
+
+# South North-South then EAST
+30 x*** -> N 30
+30 N*** -> X 31
+31 ***x -> S 31
+31 ***S -> E 3
+
+# West East-West then SOUTH
+40 *x** -> E 40
+40 *E** -> X 41
+41 **x* -> W 41
+41 **W* -> S 4
+
+
+Floating Blocks
+0 x*** -> N 0
+0 N*x* -> W 0
+0 N*W* -> X 1
+
+# Hug North Wall
+1 x*** -> N 2
+1 N*x* -> X 10
+1 N*Wx -> X 40
+1 NxWS -> E 3
+
+# Hug East Wall
+2 *x** -> E 3 
+2 xE** -> X 20
+2 NEx* -> X 10
+2 NEWx -> S 4
+
+# Hug South Wall
+3 ***x -> S 4
+3 *x*S -> X 30
+3 xE*S -> X 20
+3 NExS -> W 1
+
+# Hug West Wall
+4 **x* -> W 1
+4 **Wx -> X 40
+4 *xWS -> X 30
+4 xEWS -> N 2
+
+# North South-North then WEST
+10 ***x -> S 11
+10 ***S -> X 13
+
+11 **x* -> W 12
+11 **W* -> X 10
+12 *x** -> E 10
+
+13 x*** -> N 13
+13 N*** -> W 1
+
+# East West-East then NORTH
+20 **x* -> W 20
+20 **W* -> X 21
+21 *x** -> E 21
+21 *E** -> N 2
+
+# South North-South then EAST
+30 x*** -> N 31
+30 N*** -> X 33
+
+31 *x** -> E 32
+31 *E** -> X 30
+32 **x* -> W 30
+
+33 ***x -> S 33
+33 ***S -> E 3
+
+# West East-West then SOUTH
+40 *x** -> E 40
+40 *E** -> X 41
+41 **x* -> W 41
+41 **W* -> S 4
+
+
+
+FINAL MAP WORKS FOR ALL
+0 x*** -> N 0
+0 N*x* -> W 0
+0 N*W* -> X 5
+5 *x** -> E 5
+5 *E*x -> S 5
+5 *E*S -> X 1
+
+# Hug North Wall
+1 x*** -> N 2
+1 N*x* -> X 10
+1 N*Wx -> X 40
+1 NxWS -> E 3
+
+# Hug East Wall
+2 *x** -> E 3 
+2 xE** -> X 20
+2 NEx* -> X 10
+2 NEWx -> S 4
+
+# Hug South Wall
+3 ***x -> S 4
+3 *x*S -> X 30
+3 xE*S -> X 20
+3 NExS -> W 1
+
+# Hug West Wall
+4 **x* -> W 1
+4 **Wx -> X 40
+4 *xWS -> X 30
+4 xEWS -> N 2
+
+# North South-North then WEST
+10 ***x -> S 11
+10 ***S -> X 13
+
+11 **x* -> W 12
+11 **W* -> X 10
+12 *x** -> E 10
+
+13 x*** -> N 13
+13 N*** -> W 1
+
+# East West-East then NORTH
+20 **x* -> W 21
+20 **W* -> X 23
+
+21 ***x -> S 22
+21 ***S -> X 20
+22 x*** -> N 20
+
+23 *x** -> E 23
+23 *E** -> N 2
+
+# South North-South then EAST
+30 x*** -> N 31
+30 N*** -> X 33
+
+31 *x** -> E 32
+31 *E** -> X 30
+32 **x* -> W 30
+
+33 ***x -> S 33
+33 ***S -> E 3
+
+# West East-West then SOUTH
+40 *x** -> E 40
+40 *E** -> X 41
+41 **x* -> W 41
+41 **W* -> S 4
+
+
